@@ -15,7 +15,7 @@ Work in progress.
 - [x] TCKN, IBAN (mod-97), credit card (Luhn) and date validation
 - [x] Fake data generator (`python -m scripts.generate_fake_data`)
 - [x] TCKN / IBAN / card / birth date detection with overlap resolution
-- [ ] Pseudonymization and removal
+- [x] Pseudonymization and removal
 - [ ] Highlighting and risk report (incl. special category data warnings)
 - [ ] CSV / Excel support
 - [ ] Name detection

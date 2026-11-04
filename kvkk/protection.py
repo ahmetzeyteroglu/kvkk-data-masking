@@ -3,6 +3,9 @@ import re
 
 def digits_only(value):
     # Bir metindeki rakam dışı tüm karakterleri (boşluk, tire, +, parantez) atar.
+    # Regex'te:
+    # \d → rakam demektir. Örneğin 0, 5, 9.
+    # \D → rakam olmayan karakter demektir.
     return re.sub(r"\D", "", value)
 
 
@@ -59,15 +62,96 @@ def mask(finding):
     return "*" * len(finding.value)
 
 
-def protect_text(text, findings, method="mask"):
+def normalize(finding):
+    # Aynı verinin farklı yazımlarını tek bir biçime indirger.
+    # Örnek: "0532 123 45 67" ve "+905321234567" -> "5321234567"
+    # Takma ad tablosu bu değeri anahtar olarak kullanır.
+    if finding.kind == "PHONE":
+        return digits_only(finding.value)[-10:]
+    if finding.kind in ("TCKN", "CREDIT_CARD", "BIRTH_DATE"):
+        # 15.06.1990 ve 15/06/1990 aynı tarihtir; sadece rakamlara bakarız.
+        return digits_only(finding.value)
+    if finding.kind == "IBAN":
+        return finding.value.replace(" ", "").upper()
+    # E-posta ve ad-soyad gibi metinsel türlerde büyük/küçük harf farkı önemsizdir.
+    return finding.value.strip().lower()
+
+
+# Takma ad kodlarının önekleri: Phone_1, Person_2 ...
+PSEUDONYM_PREFIX = {
+    "PHONE": "Phone",
+    "EMAIL": "Email",
+    "TCKN": "TCKN",
+    "IBAN": "IBAN",
+    "CREDIT_CARD": "Card",
+    "BIRTH_DATE": "Date",
+    "FULL_NAME": "Person",
+}
+
+
+class PseudonymTable:
+    # Gerçek değer -> takma ad eşlemesini tutar.
+    # Aynı değer (normalize edilmiş hali) her zaman aynı kodu alır.
+    # Hukuki not: Bu tablo var olduğu sürece veri hâlâ kişisel veridir;
+    # tablo korunmuş veriden ayrı saklanmalıdır.
+
+    def __init__(self):
+        # Kurucu: boş bir eşleme sözlüğü ve tür başına sayaçlarla başlar.
+        self.codes = {}     # (kind, normalize edilmiş değer) -> "Phone_1"
+        self.counters = {}  # kind -> o türde şimdiye kadar verilen kod sayısı
+        self.originals = {}  # "Phone_1" -> metinde ilk görülen orijinal yazım
+
+    def get_code(self, finding):
+        # Bulgunun takma adını döndürür; daha önce görülmediyse yeni kod üretir.
+        key = (finding.kind, normalize(finding))
+        prefix = PSEUDONYM_PREFIX.get(finding.kind, finding.kind)
+
+        # Bu değer daha önce görüldüyse aynı kodu veririz.
+        if key in self.codes:
+            return self.codes[key]
+
+        # İlk kez görüldü: bu türün sayacını bir artırıp yeni kod üretiriz.
+        number = self.counters.get(finding.kind, 0) + 1
+        self.counters[finding.kind] = number
+        code = f"{prefix}_{number}"
+
+        self.codes[key] = code
+        self.originals[code] = finding.value
+        return code
+
+    def mapping(self):
+        # Arayüzde gösterilecek eşleme listesini döndürür: [(kod, orijinal değer), ...]
+        return list(self.originals.items())
+
+
+REMOVED_TEXT = "[REMOVED]"
+
+
+def protect_text(text, findings, method="mask", table=None):
     # Metindeki tüm bulguları seçilen yönteme göre değiştirir.
+    # method: "mask" (maskeleme), "pseudonym" (takma ad) veya "remove" (silme).
+    # table: takma ad için kullanılacak PseudonymTable. Verilmezse yenisi açılır;
+    # birden çok metin/hücrede tutarlı kod için aynı tablo dışarıdan verilmelidir.
     # Değiştirmeyi sondan başa yapıyoruz: böylece öndeki bulguların
     # start/end indeksleri, arkadaki değişikliklerden etkilenmez.
-    if method != "mask":
+    if method not in ("mask", "pseudonym", "remove"):
         raise ValueError("Unknown protection method: " + method)
+    if table is None:
+        table = PseudonymTable()
+
+    # Kodlar metindeki okuma sırasına göre verilsin diye (ilk geçen kişi Person_1)
+    # takma adları önce baştan sona sırayla üretiyoruz.
+    if method == "pseudonym":
+        for finding in sorted(findings, key=lambda f: f.start):
+            table.get_code(finding)
 
     result = text
     for finding in sorted(findings, key=lambda f: f.start, reverse=True):
-        replacement = mask(finding)
+        if method == "mask":
+            replacement = mask(finding)
+        elif method == "pseudonym":
+            replacement = table.get_code(finding)
+        else:
+            replacement = REMOVED_TEXT
         result = result[:finding.start] + replacement + result[finding.end:]
     return result
