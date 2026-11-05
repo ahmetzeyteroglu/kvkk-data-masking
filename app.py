@@ -1,7 +1,9 @@
 import streamlit as st
 
 from kvkk.detection import find_all
+from kvkk.highlight import highlight_html
 from kvkk.protection import PseudonymTable, protect_text
+from kvkk.risk import count_by_kind, find_special_categories
 
 # Arayüzde görünen yöntem adı -> protect_text'in beklediği method değeri
 METHODS = {
@@ -29,12 +31,21 @@ if st.button("Protect"):
         left, right = st.columns(2)
         with left:
             st.subheader("Original")
-            st.text(text)
+            # st.html, metni Markdown olarak yorumlamaz; metindeki * veya # işaretleri biçim değiştirmez.
+            st.html(highlight_html(text, findings))
         with right:
             st.subheader("Protected")
             st.text(protected)
 
         st.info(f"{len(findings)} personal data item(s) found.")
+
+        st.subheader("Risk report")
+        counts = count_by_kind(findings)
+        if counts:
+            st.table([{"Data type": kind, "Count": count} for kind, count in counts.items()])
+        # Özel nitelikli veriler otomatik silinmez; bağlamı değerlendirme kararı insana bırakılır.
+        for category, word in find_special_categories(text):
+            st.warning(f"Possible special category data ({category}): '{word}' - KVKK Art. 6")
 
         if METHODS[method_label] == "pseudonym" and table.mapping():
             with st.expander("Pseudonym mapping table (keep separate from protected data!)"):

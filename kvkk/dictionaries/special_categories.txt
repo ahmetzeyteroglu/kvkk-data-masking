@@ -1,0 +1,43 @@
+# KVKK md. 6 özel nitelikli veri ipuçları. Biçim: kategori;kelime kökü
+# Kökler kelimenin başıyla eşleşir: "hasta" -> hastalığı, hastanede
+Health;hasta
+Health;diyabet
+Health;kanser
+Health;ameliyat
+Health;teşhis
+Health;tedavi
+Health;depresyon
+Health;psikiyatri
+Health;engelli
+Health;hamile
+Religion or belief;müslüman
+Religion or belief;hristiyan
+Religion or belief;yahudi
+Religion or belief;budist
+Religion or belief;ateist
+Religion or belief;alevi
+Religion or belief;sünni
+Religion or belief;mezhep
+Religion or belief;dindar
+Race or ethnic origin;ırk
+Race or ethnic origin;etnik
+Political opinion;siyasi görüş
+Political opinion;siyasi düşünce
+Political opinion;parti üye
+Philosophical belief;felsefi inanç
+Clothing;başörtü
+Clothing;türban
+Clothing;tesettür
+Membership;sendika
+Membership;dernek üye
+Membership;vakıf üye
+Sexual life;cinsel
+Criminal record;mahkum
+Criminal record;mahkûm
+Criminal record;hükümlü
+Criminal record;sabıka
+Biometric or genetic;parmak izi
+Biometric or genetic;biyometrik
+Biometric or genetic;retina
+Biometric or genetic;genetik
+Biometric or genetic;dna

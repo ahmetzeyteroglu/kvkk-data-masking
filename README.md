@@ -16,7 +16,7 @@ Work in progress.
 - [x] Fake data generator (`python -m scripts.generate_fake_data`)
 - [x] TCKN / IBAN / card / birth date detection with overlap resolution
 - [x] Pseudonymization and removal
-- [ ] Highlighting and risk report (incl. special category data warnings)
+- [x] Highlighting and risk report (incl. special category data warnings)
 - [ ] CSV / Excel support
 - [ ] Name detection
 
