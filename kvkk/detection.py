@@ -40,7 +40,7 @@ CARD_PATTERN = re.compile(r"(?<!\d)(?:\d[ -]?){12,18}\d(?!\d)")
 DATE_PATTERN = re.compile(r"(?<!\d)\d{2}[./-]\d{2}[./-]\d{4}(?!\d)")
 
 # Bir tarihin "doğum tarihi" sayılması için yakınında geçmesi gereken ifadeler.
-BIRTH_DATE_KEYWORDS = ["doğum", "dogum", "d.t", "d. tarihi"]
+BIRTH_DATE_KEYWORDS = ["doğum", "dogum", "d.t", "d. tarihi", "birth"]
 BIRTH_DATE_WINDOW = 20  # Tarihin önünde ve arkasında bakılacak karakter sayısı
 
 # Çakışmada hangi türün kazanacağı: sayı küçük olan daha önceliklidir.

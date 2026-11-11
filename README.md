@@ -17,7 +17,7 @@ Work in progress.
 - [x] TCKN / IBAN / card / birth date detection with overlap resolution
 - [x] Pseudonymization and removal
 - [x] Highlighting and risk report (incl. special category data warnings)
-- [ ] CSV / Excel support
+- [x] CSV / Excel support
 - [ ] Name detection
 
 ## Setup
