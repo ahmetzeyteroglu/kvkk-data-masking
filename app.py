@@ -73,15 +73,23 @@ with text_tab:
             show_mapping(method, table)
 
 with file_tab:
-    uploaded = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
+    uploaded = st.file_uploader(
+        "Upload a CSV or Excel file",
+        type=["csv", "xlsx"],
+        help="For Excel files only the first sheet is processed.",
+    )
 
     if uploaded is not None:
         try:
             df = read_table(uploaded, uploaded.name)
         except Exception as error:
-            # Bozuk veya okunamayan dosyada uygulama çökmesin, kullanıcıya mesaj gösterilsin.
-            st.error(f"Could not read the file: {error}")
+            # Bozuk, boş veya okunamayan dosyada uygulama çökmesin; anlaşılır bir mesaj gösterilsin.
+            # Teknik ayrıntı, sorunu bulmaya yardım etsin diye altta küçük yazıyla verilir.
+            st.error("Could not read the file. Please upload a valid, non-empty CSV or Excel (.xlsx) file.")
+            st.caption(f"Details: {type(error).__name__}: {error}")
         else:
+            if df.empty:
+                st.warning("The file has no data rows.")
             table = PseudonymTable()
             protected_df = protect_table(df, method, table)
 

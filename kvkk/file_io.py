@@ -8,13 +8,26 @@ from kvkk.protection import PseudonymTable, protect_text
 EXCEL_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
 
+def _read_csv(file):
+    # CSV'yi önce UTF-8 ile okur; olmazsa Türkçe Windows'ta Excel'in kullandığı cp1254 ile dener.
+    # cp1254'teki "ü", "ş" gibi harfler geçerli UTF-8 değildir, bu yüzden ilk deneme hata verir.
+    try:
+        return pd.read_csv(file, dtype=str, keep_default_na=False, encoding="utf-8-sig")
+    except UnicodeDecodeError:
+        # Yüklenen dosya ilk denemede sonuna kadar okundu; başa sarmadan tekrar okunamaz.
+        if hasattr(file, "seek"):
+            file.seek(0)
+        return pd.read_csv(file, dtype=str, keep_default_na=False, encoding="cp1254")
+
+
 def read_table(file, name):
     # Yüklenen CSV veya Excel dosyasını, tüm hücreler metin olacak şekilde okur.
     # dtype=str: TC ve kart numaraları sayıya dönüşüp bozulmaz (ör. 1.23e+10, baştaki 0'ın kaybı).
     # keep_default_na=False: boş hücreler NaN yerine boş metin ("") olarak gelir.
+    # Excel dosyalarında sadece ilk sayfa okunur.
     lower = name.lower()
     if lower.endswith(".csv"):
-        return pd.read_csv(file, dtype=str, keep_default_na=False, encoding="utf-8-sig")
+        return _read_csv(file)
     if lower.endswith(".xlsx"):
         return pd.read_excel(file, dtype=str, keep_default_na=False)
     raise ValueError("Unsupported file type: " + name)

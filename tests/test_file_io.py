@@ -34,6 +34,13 @@ def test_csv_cells_stay_as_text():
     assert df.at[0, "note"] == ""  # Boş hücre NaN değil, boş metin
 
 
+def test_csv_saved_by_turkish_excel_is_read():
+    # Türkçe Windows'ta Excel, CSV'yi cp1254 kodlamasıyla kaydeder.
+    data = io.BytesIO("full_name,phone\nGülşen Çetin,0532 123 45 67\n".encode("cp1254"))
+    df = read_table(data, "people.csv")
+    assert df.at[0, "full_name"] == "Gülşen Çetin"
+
+
 def test_unsupported_extension_raises_error():
     with pytest.raises(ValueError):
         read_table(io.BytesIO(b"x"), "people.pdf")
