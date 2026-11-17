@@ -1,5 +1,6 @@
 import re
 from dataclasses import dataclass
+from pathlib import Path
 
 from kvkk.validation import is_valid_date, is_valid_iban, is_valid_luhn, is_valid_tckn
 
@@ -51,7 +52,39 @@ PRIORITY = {
     "PHONE": 4,
     "BIRTH_DATE": 5,
     "EMAIL": 6,
+    "FULL_NAME": 7,
 }
+
+NAMES_PATH = Path(__file__).parent / "dictionaries" / "names.txt"
+
+
+def load_first_names(path=NAMES_PATH):
+    # Ad sözlüğünü okur; boş satırları ve # ile başlayan açıklama satırlarını atlar.
+    names = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            names.append(line)
+    return names
+
+
+FIRST_NAMES = load_first_names()
+
+# Büyük harfle başlayıp küçük harflerle devam eden Türkçe kelime: Yılmaz, Özdemir, İsmail
+CAPITALIZED_WORD = r"[A-ZÇĞİÖŞÜ][a-zçğıöşü]+"
+
+# Sözlükteki bir ad + aynı satırda boşlukla ayrılmış 1-2 büyük harfli kelime.
+# Uzun adlar önce denensin diye sıralanır (yoksa "Oğuzhan" yerine "Oğuz" eşleşirdi).
+NAME_PATTERN = re.compile(
+    r"(?<!\w)(?:" + "|".join(sorted(FIRST_NAMES, key=len, reverse=True)) + r")"
+    r"(?: " + CAPITALIZED_WORD + r"){1,2}(?!\w)"
+)
+
+# Adı sözlükte olmasa bile kişi adının geleceğini gösteren ipuçları; ad 1. gruptadır.
+NAME_HINT_PATTERN = re.compile(
+    r"(?:Sayın|Ad Soyad:|Adı Soyadı:|Hasta:) ?"
+    r"(" + CAPITALIZED_WORD + r"(?: " + CAPITALIZED_WORD + r"){1,2})(?!\w)"
+)
 
 
 def _find_with_pattern(text, pattern, kind, validator=None):
@@ -108,6 +141,25 @@ def find_birth_dates(text):
     return findings
 
 
+def find_names(text):
+    # Ad-soyadı iki basit kuralla bulur:
+    # 1) Sözlükteki bir ad + ardından büyük harfli kelime(ler): "Ahmet Yılmaz geldi"
+    # 2) "Sayın", "Ad Soyad:" gibi ipuçlarından sonra gelen büyük harfli kelimeler.
+    # Sınırlılık: tamamı büyük harfle yazılmış ("AHMET YILMAZ") veya tek başına geçen adlar bulunmaz.
+    findings = []
+    for match in NAME_PATTERN.finditer(text):
+        words = match.group().split(" ")
+        # Üç kelimede ortadaki kelime bir ad değilse ("Ahmet Yılmaz Bey") sadece ilk ikisi alınır.
+        if len(words) == 3 and words[1] not in FIRST_NAMES:
+            words = words[:2]
+        value = " ".join(words)
+        findings.append(Finding("FULL_NAME", value, match.start(), match.start() + len(value)))
+    for match in NAME_HINT_PATTERN.finditer(text):
+        findings.append(Finding("FULL_NAME", match.group(1), match.start(1), match.end(1)))
+    # İki kural aynı adı bulursa çakışma çözümü tekini bırakır.
+    return findings
+
+
 def overlaps(first, second):
     # İki bulgunun metinde en az bir karakteri ortak mı kontrol eder.
     # Uç uca değen bulgular (biri bittiği yerde öteki başlıyorsa) çakışmış sayılmaz.
@@ -144,6 +196,7 @@ def find_all(text):
         + find_phones(text)
         + find_birth_dates(text)
         + find_emails(text)
+        + find_names(text)
     )
     findings = resolve_overlaps(findings)
     findings.sort(key=lambda f: f.start)

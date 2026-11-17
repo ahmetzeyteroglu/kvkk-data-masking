@@ -153,7 +153,7 @@ def test_sample_text_finds_every_kind_once_or_twice():
     kinds = [f.kind for f in find_all(text)]
     # Telefon metinde iki farklı biçimde geçiyor
     assert sorted(kinds) == sorted(
-        ["BIRTH_DATE", "TCKN", "PHONE", "EMAIL", "IBAN", "CREDIT_CARD", "PHONE"]
+        ["FULL_NAME", "BIRTH_DATE", "TCKN", "PHONE", "EMAIL", "IBAN", "CREDIT_CARD", "PHONE"]
     )
     # Tuzaklar: geçersiz TC ve geçersiz tarih yakalanmamalı
     values = [f.value for f in find_all(text)]

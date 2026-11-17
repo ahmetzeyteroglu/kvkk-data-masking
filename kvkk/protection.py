@@ -21,6 +21,15 @@ def _mask_email(value):
     return local_part[0] + "***@" + domain
 
 
+def _mask_name(value):
+    # Ahmet Yılmaz -> A*** Y*** (her kelimenin sadece baş harfi kalır).
+    # Yıldız sayısı sabit: gerçek uzunluk gösterilseydi adı tahmin etmek kolaylaşırdı.
+    parts = []
+    for word in value.split():
+        parts.append(word[0] + "***")
+    return " ".join(parts)
+
+
 def _mask_digits(value, keep_first, keep_last):
     # Değerdeki rakamları yıldızlar; baştan keep_first ve sondan keep_last rakam görünür kalır.
     # Rakam olmayan karakterler (boşluk, nokta, "TR") olduğu gibi bırakılır,
@@ -58,6 +67,8 @@ def mask(finding):
     if finding.kind == "BIRTH_DATE":
         # 15.06.1990 -> **.**.1990 (genelleştirme: sadece yıl kalır)
         return _mask_digits(finding.value, 0, 4)
+    if finding.kind == "FULL_NAME":
+        return _mask_name(finding.value)
     # Henüz özel kuralı olmayan türler tamamen yıldızlanır.
     return "*" * len(finding.value)
 

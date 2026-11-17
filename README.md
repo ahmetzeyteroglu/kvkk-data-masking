@@ -18,7 +18,7 @@ Work in progress.
 - [x] Pseudonymization and removal
 - [x] Highlighting and risk report (incl. special category data warnings)
 - [x] CSV / Excel support
-- [ ] Name detection
+- [x] Name detection
 
 ## Setup
 
