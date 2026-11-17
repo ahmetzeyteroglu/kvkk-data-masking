@@ -52,6 +52,16 @@ Date_1 doğumlu, TCKN_1 TC kimlik numaralı müşterimizin başvurusu alınmış
 İletişim: Phone_1 / Email_1.
 ```
 
+## Screenshots
+
+Masking, with highlighted findings and the risk report:
+
+![Text tab with masking](docs/screenshots/text-masking.png)
+
+Pseudonymization, with the mapping table shown separately:
+
+![Text tab with pseudonymization](docs/screenshots/text-pseudonymization.png)
+
 ## How detection works
 
 1. A regular expression finds candidates for each data type.
