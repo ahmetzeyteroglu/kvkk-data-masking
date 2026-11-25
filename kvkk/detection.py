@@ -20,8 +20,9 @@ EMAIL_PATTERN = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 # Türkiye cep telefonu: isteğe bağlı +90 / 0090 / 0 öneki, ardından 5XX XXX XX XX.
 # Gruplar arasında boşluk veya tire olabilir. (?<![\d+]) ve (?!\d) sayesinde
 # daha uzun bir sayının (örneğin 11 haneli TC) ortasından parça yakalanmaz.
+# Baştaki isteğe bağlı "(" sayesinde "(0532) 123 45 67" parantezi dahil bütün olarak bulunur.
 PHONE_PATTERN = re.compile(
-    r"(?<![\d+])"
+    r"(?<![\d+])\(?"
     r"(?:(?:\+90|0090|0)[\s-]?)?"
     r"\(?5\d{2}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}"
     r"(?!\d)"
@@ -43,6 +44,11 @@ DATE_PATTERN = re.compile(r"(?<!\d)\d{2}[./-]\d{2}[./-]\d{4}(?!\d)")
 # Bir tarihin "doğum tarihi" sayılması için yakınında geçmesi gereken ifadeler.
 BIRTH_DATE_KEYWORDS = ["doğum", "dogum", "d.t", "d. tarihi", "birth"]
 BIRTH_DATE_WINDOW = 20  # Tarihin önünde ve arkasında bakılacak karakter sayısı
+
+# Cümle sonu: ardından boşluk/metin sonu gelen . ! ? ya da satır sonu.
+# (?<!\b\w): tek harften sonraki nokta kısaltmadır ("D. Tarihi", "T.C."), cümle sonu sayılmaz.
+# Tarihin içindeki noktalar ("30.04.1965") ardından boşluk gelmediği için sayılmaz.
+SENTENCE_END = re.compile(r"(?<!\b\w)[.!?](?=\s|$)|\n")
 
 # Çakışmada hangi türün kazanacağı: sayı küçük olan daha önceliklidir.
 PRIORITY = {
@@ -124,7 +130,18 @@ def find_cards(text):
 
 def _has_birth_keyword_nearby(text, start, end):
     # Tarihin etrafındaki küçük bir pencerede "doğum" benzeri bir ifade var mı bakar.
-    window = text[max(0, start - BIRTH_DATE_WINDOW):end + BIRTH_DATE_WINDOW].lower()
+    # Pencere cümle sınırında kesilir; yan cümledeki "doğumlu" kelimesi
+    # ("Fatura tarihi: 24.08.2024. 30.04.1965 doğumlu.") fatura tarihini doğum tarihi yapmaz.
+    before = text[max(0, start - BIRTH_DATE_WINDOW):start]
+    after = text[end:end + BIRTH_DATE_WINDOW]
+    # Öndeki parçada son cümle sonundan sonrası, arkadaki parçada ilk cümle sonuna kadarı kalır.
+    boundaries = list(SENTENCE_END.finditer(before))
+    if boundaries:
+        before = before[boundaries[-1].end():]
+    boundary = SENTENCE_END.search(after)
+    if boundary:
+        after = after[:boundary.start()]
+    window = (before + after).lower()
     for keyword in BIRTH_DATE_KEYWORDS:
         if keyword in window:
             return True

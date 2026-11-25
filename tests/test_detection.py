@@ -159,3 +159,26 @@ def test_sample_text_finds_every_kind_once_or_twice():
     values = [f.value for f in find_all(text)]
     assert "12345678951" not in values
     assert "31.02.2024" not in values
+
+
+# ---------- Ölçüm betiğinin bulduğu sorunlar ----------
+
+def test_phone_with_parentheses_includes_opening_bracket():
+    findings = find_phones("Tel: (0552) 257 25 74.")
+    assert [f.value for f in findings] == ["(0552) 257 25 74"]
+    assert [f.value for f in find_phones("Tel: (532) 123 45 67")] == ["(532) 123 45 67"]
+
+
+def test_birth_keyword_in_next_sentence_does_not_count():
+    text = "Fatura tarihi: 24.08.2024. 30.04.1965 doğumlu."
+    assert [f.value for f in find_birth_dates(text)] == ["30.04.1965"]
+
+
+def test_birth_keyword_in_previous_sentence_does_not_count():
+    text = "Doğum günü kutlandı. Fatura tarihi: 24.08.2024."
+    assert find_birth_dates(text) == []
+
+
+def test_abbreviation_is_not_a_sentence_end():
+    assert [f.value for f in find_birth_dates("D. Tarihi: 01.02.1990")] == ["01.02.1990"]
+    assert [f.value for f in find_birth_dates("D.T. 01.02.1990")] == ["01.02.1990"]

@@ -47,7 +47,7 @@ ORGANIZATION_NAMES = [
 # Ad sözlüğünde olmayan adlar (bilinen sınırlılık ölçümü için).
 UNLISTED_FIRST_NAMES = ["Kıvanç", "Tunç", "Doruk", "Ilgaz", "Çağan", "Alp"]
 
-# Bilinen zayıflıklar: ana ölçüme karışmasın diye ayrı ölçülür.
+# Zor durumlar: ana ölçüme karışmasın diye ayrı ölçülür.
 EDGE_CASES = {
     "ALL_CAPS_NAME": "Full name written in capitals (AHMET YILMAZ)",
     "UNLISTED_NAME": "First name not in the dictionary, no hint word",
@@ -136,7 +136,7 @@ def build_document():
 
 
 def build_edge_document(case):
-    # Bilinen bir zayıflığı içeren kısa bir metin üretir.
+    # Zor bir durumu (bilinen zayıflık veya düzeltilmiş bir hata) içeren kısa bir metin üretir.
     document = Document()
     last_name = random.choice(LAST_NAMES)
     if case == "ALL_CAPS_NAME":
@@ -234,11 +234,14 @@ def build_report(documents, edge_documents):
     all_items = sum(len(d.truth) for d in documents)
     lines += [
         "",
-        "## Exposure before and after protection",
+        "## Exposure before and after protection (full values)",
         "",
-        "Personal data items whose original value still appears unchanged in the output text.",
+        "Personal data items whose **full** original value still appears unchanged in the output text.",
+        "This does not mean nothing is revealed: masking intentionally keeps parts of the value",
+        "(last 4 card digits, birth year, initials, email domain), so masked data can still identify",
+        "a person when combined with other information and remains personal data.",
         "",
-        "| State | Items left exposed | Share of all items |",
+        "| State | Full values left exposed | Share of all items |",
         "|---|---|---|",
     ]
     for label, method in [("Before protection", None), ("After masking", "mask"),
@@ -248,7 +251,7 @@ def build_report(documents, edge_documents):
 
     lines += [
         "",
-        "## Known limitations (measured separately)",
+        "## Hard cases (measured separately)",
         "",
         "| Case | Items | Found correctly | Detection rate |",
         "|---|---|---|---|",

@@ -133,11 +133,18 @@ pytest -v
 is known (7 data types per document plus decoys that look like personal data but are not).
 Results are saved to [docs/evaluation_results.md](docs/evaluation_results.md).
 
-On this test set every personal data item was found (recall 100%) and no item was left exposed after
-any of the three protection methods. Overall precision was 93.7%: false alarms came from street and
-organization names containing a first name ("Gül Sokak", "Deniz Kuvvetleri") and from invoice dates
-written next to a birth date keyword. These numbers hold for the synthetic formats used, not for
-arbitrary real documents.
+On this test set every personal data item was found (recall 100%), and after each of the three
+protection methods no full original value was left in the output. This does not mean masked text
+reveals nothing: masking intentionally keeps parts of a value (last 4 card digits, birth year,
+initials, email domain), so masked data can still be personal data. Overall precision was 94.9%;
+all false alarms came from street and organization names containing a first name
+("Gül Sokak", "Deniz Kuvvetleri").
+
+The first run also found two problems that were then fixed: invoice dates in the sentence next to
+"doğumlu" were reported as birth dates (the keyword search now stops at sentence boundaries), and
+phones written as `(0532) 123 45 67` were found without the opening bracket. Because the fixes were
+made after looking at this test set, the numbers above may be slightly optimistic. They hold for the
+synthetic formats used, not for arbitrary real documents.
 
 ## Limitations
 
