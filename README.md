@@ -62,6 +62,10 @@ Pseudonymization, with the mapping table shown separately:
 
 ![Text tab with pseudonymization](docs/screenshots/text-pseudonymization.png)
 
+Risk report with counts per data type and special category data warnings:
+
+![Risk report](docs/screenshots/risk-report.png)
+
 ## How detection works
 
 1. A regular expression finds candidates for each data type.
