@@ -62,6 +62,10 @@ Pseudonymization, with the mapping table shown separately:
 
 ![Text tab with pseudonymization](docs/screenshots/text-pseudonymization.png)
 
+File tab with pseudonymization; the same person gets the same codes in every row:
+
+![File tab with pseudonymization](docs/screenshots/file-pseudonymization.png)
+
 Risk report with counts per data type and special category data warnings:
 
 ![Risk report](docs/screenshots/risk-report.png)
