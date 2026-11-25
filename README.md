@@ -119,6 +119,18 @@ python -m scripts.generate_fake_data
 pytest -v
 ```
 
+## Evaluation
+
+`python -m scripts.evaluate` measures detection accuracy on 200 synthetic documents whose answer key
+is known (7 data types per document plus decoys that look like personal data but are not).
+Results are saved to [docs/evaluation_results.md](docs/evaluation_results.md).
+
+On this test set every personal data item was found (recall 100%) and no item was left exposed after
+any of the three protection methods. Overall precision was 93.7%: false alarms came from street and
+organization names containing a first name ("Gül Sokak", "Deniz Kuvvetleri") and from invoice dates
+written next to a birth date keyword. These numbers hold for the synthetic formats used, not for
+arbitrary real documents.
+
 ## Limitations
 
 This tool is an aid for human review, not a guarantee of KVKK compliance.
