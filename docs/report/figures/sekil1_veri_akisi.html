@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_style.css">
+<style>.box{min-width:150px}.a{display:flex;align-items:center;flex:0 0 auto;font-size:12px;text-align:center;padding:0 6px}
+.a .l{display:flex;flex-direction:column;align-items:center;gap:6px;white-space:nowrap}.a .ln{width:120px;border-top:2px solid #333;position:relative}
+.a .ln:after{content:"";position:absolute;right:-2px;top:-7px;border:6px solid transparent;border-left:10px solid #333}
+.legal{font-size:12.5px;color:#b3261e;margin-top:10px;line-height:1.4}
+.legal.g{color:#1e6b34}</style></head><body>
+<div class="panel"><h3>(a) Mevcut durum: kontrolsüz kullanım ("gölge yapay zekâ")</h3>
+<div class="row">
+ <div class="box">Müşteri kaydı<small>CRM / e-posta / CSV<br>ad, TCKN, telefon, IBAN,<br>kart, doğum tarihi, sağlık notu</small></div>
+ <div class="a"><div class="l">kopyala-yapıştır<div class="ln"></div>çalışan</div></div>
+ <div class="box risk">Ham metin<small>tüm kişisel veriler<br>açık hâlde</small></div>
+ <div class="a"><div class="l">internet<div class="ln"></div>yurt dışı sunucu</div></div>
+ <div class="box ext">Üretken YZ aracı<small>üçüncü taraf hizmet<br>kayıt, saklama, model çıktısı</small></div>
+</div>
+<div class="row" style="margin-top:10px;margin-left:330px">
+ <div class="box risk" style="min-width:300px">Test / geliştirme ortamı<small>gerçek müşteri verisiyle test</small></div>
+</div>
+<div class="legal">Riskler: amaçla sınırlılık ve ölçülülük ihlali (KVKK m.4/2-ç) · hukuka aykırı yurt dışı aktarım (m.9) · özel nitelikli veri (m.6) · veri güvenliği tedbiri yok (m.12) · çıktılar üzerinden üçüncü kişilere erişim (KVK Kurumu, 2026, s. 9)</div>
+</div>
+<div class="panel"><h3>(b) Önerilen durum: veri kurumdan çıkmadan önce yerel tespit ve koruma</h3>
+<div class="row">
+ <div class="box">Müşteri kaydı<small>CRM / e-posta / CSV</small></div>
+ <div class="a"><div class="l">metin / dosya<div class="ln"></div>yerel</div></div>
+ <div class="box tool">KVKK Maskeleme Aracı<small>1. tespit (7 veri türü)<br>2. risk raporu + m.6 uyarısı<br>3. maskeleme / takma ad / kaldırma</small></div>
+ <div class="a"><div class="l">korunmuş metin<div class="ln"></div>insan kontrolü</div></div>
+ <div class="box ext">Üretken YZ aracı<br>veya test ortamı<small>kişisel veri yok ya da<br>takma adlı</small></div>
+</div>
+<div class="row" style="margin-top:12px;margin-left:330px">
+ <div class="box ok" style="min-width:300px">Takma ad eşleme tablosu<small>kurum içinde, ayrı saklanır; dışarı gönderilmez</small></div>
+</div>
+<div class="legal g">Tedbirler: veri minimizasyonu (m.4/2-ç; GDPR m.5/1-c) · tasarımdan itibaren gizlilik (GDPR m.25) · teknik tedbir (m.12; GDPR m.32/1-a)</div>
+</div></body></html>

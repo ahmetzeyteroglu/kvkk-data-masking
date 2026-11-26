@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_style.css">
+<style>.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.col h4{font-size:14px;margin-bottom:8px;text-align:center;color:#333}
+.box{text-align:left;margin-bottom:10px}.box b{display:block;margin-bottom:3px}.mod{font-family:"DejaVu Sans Mono",monospace;font-size:11.5px;color:#1c4e8c}
+.flow{font-size:13px;margin:6px 0 14px;color:#333}</style></head><body>
+<div class="flow">Akış: Kullanıcı girdisi → <b>Tespit</b> → çakışma çözümü → <b>Koruma</b> → vurgulama ve risk raporu → çıktı / indirme. Tüm işlem yerel makinede çalışır, dış servise bağlantı yoktur.</div>
+<div class="grid">
+<div class="col"><h4>Arayüz ve girdi</h4>
+ <div class="box tool"><b>Streamlit arayüzü</b><span class="mod">app.py</span><small>Metin sekmesi · Dosya sekmesi<br>yöntem seçici · indirme düğmeleri</small></div>
+ <div class="box"><b>Dosya okuma / yazma</b><span class="mod">kvkk/file_io.py</span><small>CSV (UTF-8, Türkçe Excel CSV) ve Excel okuma; hücre bazında tespit; CSV/Excel çıktı</small></div>
+ <div class="box"><b>Sentetik veri üretici</b><span class="mod">scripts/generate_fake_data.py</span><small>doğrulamadan geçen ama gerçek kişiye ait olmayan veriler</small></div>
+</div>
+<div class="col"><h4>Tespit katmanı</h4>
+ <div class="box tool"><b>Desen + doğrulama</b><span class="mod">kvkk/detection.py · validation.py</span><small>
+ TCKN: 11 hane + kontrol hanesi algoritması<br>IBAN: TR + mod-97<br>Kart: Luhn algoritması<br>Telefon: TR cep biçimleri (+90, 0, parantez)<br>E-posta: desen<br>Doğum tarihi: geçerli tarih + "doğum" ifadesi (aynı cümlede)<br>Ad soyad: 157 adlık sözlük + bağlam ipuçları</small></div>
+ <div class="box"><b>Çakışma çözümü</b><small>aynı metin parçası iki türe uyarsa öncelik sırası (IBAN &gt; kart &gt; TCKN &gt; …)</small></div>
+</div>
+<div class="col"><h4>Koruma ve raporlama</h4>
+ <div class="box tool"><b>Koruma yöntemleri</b><span class="mod">kvkk/protection.py</span><small>Maskeleme: 532***4567, F*** Y***<br>Takma ad: Person_1, Phone_1 (aynı değere aynı ad)<br>Kaldırma: [REMOVED]</small></div>
+ <div class="box ok"><b>Eşleme tablosu</b><small>yalnız takma adda; korunmuş veriden ayrı gösterilir</small></div>
+ <div class="box"><b>Vurgulama + risk raporu</b><span class="mod">kvkk/highlight.py · risk.py</span><small>tür bazında sayım; m.6 özel nitelikli veri anahtar kelime uyarısı (10 kategori, 41 kök)</small></div>
+</div></div>
+<div class="box" style="margin-top:4px"><b>Doğrulama</b> <span class="mod">tests/ (113 birim testi) · scripts/evaluate.py (200 sentetik belge, cevap anahtarına göre kesinlik/duyarlılık)</span></div>
+</body></html>
