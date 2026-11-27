@@ -18,31 +18,31 @@ add(TAB('Temel kavramlar ve örnekleri', ['Kavram', 'Ne demek?', 'Örnek ("Fatma
   ['Kaldırma', 'Veriyi tamamen silmek', '[REMOVED]'],
   ['Anonimleştirme', 'Kişinin başka bilgilerle birleştirilse bile hiçbir şekilde bulunamaması', 'Yalnızca yukarıdaki işlemlerle sağlanamaz'],
 ], [2, 5, 4]));
-add(P(`Raporun ana fikri şudur: <b>Maskeleme ve takma adlandırma, anonimleştirme değildir.</b> Bu yöntemler riski azaltır ama veri çoğu durumda hâlâ "kişisel veri" olarak kalır ve kanunun koruması devam eder.`));
+add(P(`Bu çalışma boyunca da görüleceği üzere maskeleme ve takma adlandırma, anonimleştirme değildir. Bu yöntemler riski azaltır ama veri çoğu durumda hâlâ "kişisel veri" olarak kalır ve kanunun koruması devam eder.`));
 
 // ------------------------------------------------------------------ 2
 add(h1('2. PROBLEM TANIMI VE İHTİYAÇ ANALİZİ'));
 add(h2('2.1. Problem'));
-add(P(`Problem, kişisel verinin <b>işin gerektirdiğinden fazla ve kontrolsüz biçimde</b> kurum dışına çıkmasıdır. Bir iade e-postasını özetlemek için müşterinin T.C. kimlik numarasına veya IBAN'ına gerek yoktur; ama metin bütün olarak kopyalanınca bunların hepsi araca gider. Kurum ise hangi verinin hangi araca gittiğini bilmez. KVK Kurumu bu durumu şöyle anlatır: "Kurumsal kontrol dışında kullanılan ÜYZ araçları ile kişisel verilerin paylaşılması, veri ihlali riskini artırabilmektedir. Bu tür kullanımlar, kişisel verilerin hukuka aykırı şekilde işlenmesi, yetkisiz kişilerce erişilebilir hâle gelmesi veya amaç dışı kullanılması gibi sonuçlara yol açabilmektedir." (KVK Kurumu, 2026a, s. 9). Kurum, kurumun bilgisi dışındaki bu kullanıma "gölge yapay zekâ" adını vermektedir.`));
+add(P(`Problem, kişisel verinin işin gerektirdiğinden fazla ve kontrolsüz biçimde kurum dışına çıkmasıdır. Bir iade e-postasını özetlemek için müşterinin T.C. kimlik numarasına veya IBAN'ına gerek yoktur; ama metin bütün olarak kopyalanınca bunların hepsi araca gider. Kurum ise hangi verinin hangi araca gittiğini bilmez. KVK Kurumu bu durumu şöyle anlatır: "Kurumsal kontrol dışında kullanılan ÜYZ araçları ile kişisel verilerin paylaşılması, veri ihlali riskini artırabilmektedir. Bu tür kullanımlar, kişisel verilerin hukuka aykırı şekilde işlenmesi, yetkisiz kişilerce erişilebilir hâle gelmesi veya amaç dışı kullanılması gibi sonuçlara yol açabilmektedir." (KVK Kurumu, 2026a, s. 9). Kurum, kurumun bilgisi dışındaki bu kullanıma "gölge yapay zekâ" adını vermektedir.`));
 add(h2('2.2. Etkilenen Taraflar'));
 add(BULLET(`<b>Müşteriler:</b> Verileri haberleri olmadan başka bir şirkete gider; dolandırıcılık ve hassas bilgilerin ortaya çıkması riskiyle karşılaşırlar.`));
 add(BULLET(`<b>Kurum (veri sorumlusu):</b> Veri güvenliği yükümlülüğünü ihlal etmiş olur. 2026 yılı için 256.357 TL ile 17.092.242 TL arası idari para cezası söz konusudur.`));
 add(BULLET(`<b>Çalışan:</b> Kişisel veriyi hukuka aykırı olarak başkasına vermek Türk Ceza Kanunu m.136'da suç olarak düzenlenmiştir.`));
 add(h2('2.3. İhtiyaç'));
-add(P(`Bütün ÜYZ araçlarını yasaklamak verimliliği düşürür ve çalışanları kişisel telefonlarına yöneltebilir. Bu nedenle ihtiyaç, ÜYZ kullanımını engellemeden <b>veriyi kurumdan çıkmadan önce azaltan</b> bir ara adımdır. Bu adımın; veriyi dışarı göndermeden yerelde çalışması, Türkiye'ye özgü numaraları doğru tanıması, farklı kullanım amaçları için farklı gizleme yöntemleri sunması ve hassas bilgiler için uyarı vermesi gerekir.`));
+add(P(`Bütün ÜYZ araçlarını yasaklamak verimliliği düşürür ve çalışanları kişisel telefonlarına yöneltebilir. Bu nedenle ihtiyaç, ÜYZ kullanımını engellemeden veriyi kurumdan çıkmadan önce azaltan bir ara adımdır. Bu adımın; veriyi dışarı göndermeden yerelde çalışması, Türkiye'ye özgü numaraları doğru tanıması, farklı kullanım amaçları için farklı gizleme yöntemleri sunması ve hassas bilgiler için uyarı vermesi gerekir.`));
 
 // ------------------------------------------------------------------ 3
 add(h1('3. LİTERATÜR ARAŞTIRMASI VE HUKUKİ MEVZUAT İNCELEMESİ'));
 add(P(`Mevzuatın güncel hâli Mevzuat Bilgi Sistemi, Resmî Gazete, KVK Kurumu ve EUR-Lex üzerinden kontrol edilmiştir.`));
 add(h2('3.1. Türk Mevzuatı'));
-add(P(`Projenin temel dayanağı <b>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK)</b>'dur. Proje için önemli maddeler şunlardır:`));
+add(P(`Projenin temel dayanağı 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK)'dur. Proje için önemli maddeler şunlardır:`));
 add(BULLET(`<b>m.3 (Tanımlar):</b> Kişisel veri, "kimliği belirli veya belirlenebilir gerçek kişiye ilişkin her türlü bilgi"dir. Anonim hâle getirme ise verinin "başka verilerle eşleştirilerek dahi" kişiyle ilişkilendirilememesidir. Bu çok yüksek bir eşiktir. KVKK'da takma adlandırmanın ayrı bir tanımı yoktur.`));
 add(BULLET(`<b>m.4 (Genel ilkeler):</b> Veri, amaçla bağlantılı, sınırlı ve ölçülü işlenmelidir. Bir metni özetlemek için kimlik numarasını da göndermek bu ilkeye aykırıdır.`));
 add(BULLET(`<b>m.6 (Özel nitelikli veriler):</b> Sağlık, sendika üyeliği, din, ceza mahkûmiyeti gibi bilgiler daha sıkı korunur. Madde, 7499 sayılı Kanunun 33. maddesiyle değiştirilmiştir.`));
 add(BULLET(`<b>m.9 (Yurt dışına aktarım):</b> Veri yurt dışına ancak belirli şartlarla (yeterlilik kararı, standart sözleşme gibi güvenceler veya sınırlı istisnalar) gönderilebilir. Madde, 7499 sayılı Kanunla değiştirilmiş (RG 12.03.2024, S. 32487) ve 01.06.2024'te yürürlüğe girmiştir. Çalışanın kurumun haberi olmadan yurt dışındaki bir araca veri girmesi bu şartların hiçbirine dayanmaz.`));
 add(BULLET(`<b>m.12 (Veri güvenliği):</b> Kurum, verinin hukuka aykırı işlenmesini ve erişilmesini önlemek için gerekli teknik ve idari tedbirleri almak zorundadır. Geliştirilen araç, bu maddede sözü edilen teknik tedbirlerin bir örneğidir.`));
 add(BULLET(`<b>m.18 (İdari para cezaları):</b> 2026 yılı tutarları Tablo 2'de verilmiştir.`));
-add(P(`Ayrıca <b>Kişisel Verilerin Silinmesi, Yok Edilmesi veya Anonim Hale Getirilmesi Hakkında Yönetmelik</b> (RG 28.10.2017, S. 30224) anonimleştirmenin usulünü, <b>Yurt Dışına Aktarım Yönetmeliği</b> (RG 10.07.2024, S. 32598) m.9'un ayrıntılarını, <b>Türk Ceza Kanunu m.135–138</b> ise kişisel verilerle ilgili suçları düzenler.`));
+add(P(`Ayrıca Kişisel Verilerin Silinmesi, Yok Edilmesi veya Anonim Hale Getirilmesi Hakkında Yönetmelik (RG 28.10.2017, S. 30224) anonimleştirmenin usulünü, Yurt Dışına Aktarım Yönetmeliği (RG 10.07.2024, S. 32598) m.9'un ayrıntılarını, Türk Ceza Kanunu m.135–138 ise kişisel verilerle ilgili suçları düzenler.`));
 add(TAB('KVKK m.18 kapsamındaki 2026 yılı idari para cezaları', ['Bent', 'Hangi yükümlülük?', 'Alt sınır', 'Üst sınır'], [
   ['18/1-a', 'Aydınlatma (m.10)', '85.437 TL', '1.709.200 TL'],
   ['18/1-b', '<b>Veri güvenliği (m.12)</b>', '<b>256.357 TL</b>', '<b>17.092.242 TL</b>'],
@@ -51,10 +51,10 @@ add(TAB('KVKK m.18 kapsamındaki 2026 yılı idari para cezaları', ['Bent', 'Ha
   ['18/1-d', 'Standart sözleşmeyi Kurum\'a bildirmeme (m.9/5)', '90.308 TL', '1.806.177 TL'],
 ], [1.3, 5, 2, 2.2], 'Kaynak: KVK Kurumu (2026b). Bu projedeki senaryo en çok 18/1-b bendiyle ilgilidir.'));
 add(h2('3.2. KVK Kurumu Rehberleri'));
-add(P(`KVK Kurumu'nun <b>Silme, Yok Etme ve Anonim Hale Getirme Rehberi</b> (2018) maskelemeyi bir yöntem olarak tanımlar (s. 13), ancak verinin başka bilgilerle birleştirilme ihtimalinin de değerlendirilmesini ister. <b>Yapay Zekâ Alanında Kişisel Verilerin Korunmasına Dair Tavsiyeler</b> (2025a) ve <b>Üretken Yapay Zekâ ve Kişisel Verilerin Korunması Rehberi</b> (2025b) ÜYZ'nin genel risklerini ele alır. Projenin çıkış noktası ise <b>İş Yerlerinde Üretken Yapay Zekâ Araçlarının Kullanımı</b> belgesidir (2026a). Bu belge "gölge yapay zekâ" riskini tanımlar ve kurumlara şunu önerir: "ÜYZ araçlarının iş süreçlerinde kullanımına ilişkin olarak, doğru ve uygun kullanımın sınırlarını ortaya koyan açık bir kurumsal politika veya yönlendirme çerçevesinin oluşturulması önem taşımaktadır." (KVK Kurumu, 2026a, s. 11).`));
+add(P(`KVK Kurumu'nun Silme, Yok Etme ve Anonim Hale Getirme Rehberi (2018) maskelemeyi bir yöntem olarak tanımlar (s. 13), ancak verinin başka bilgilerle birleştirilme ihtimalinin de değerlendirilmesini ister. Yapay Zekâ Alanında Kişisel Verilerin Korunmasına Dair Tavsiyeler (2025a) ve Üretken Yapay Zekâ ve Kişisel Verilerin Korunması Rehberi (2025b) ÜYZ'nin genel risklerini ele alır. Projenin çıkış noktası ise İş Yerlerinde Üretken Yapay Zekâ Araçlarının Kullanımı belgesidir (2026a). Bu belge "gölge yapay zekâ" riskini tanımlar ve kurumlara şunu önerir: "ÜYZ araçlarının iş süreçlerinde kullanımına ilişkin olarak, doğru ve uygun kullanımın sınırlarını ortaya koyan açık bir kurumsal politika veya yönlendirme çerçevesinin oluşturulması önem taşımaktadır." (KVK Kurumu, 2026a, s. 11).`));
 add(h2('3.3. Avrupa Birliği Düzenlemeleri ve KVKK ile Karşılaştırma'));
-add(P(`AB'nin <b>Genel Veri Koruma Tüzüğü (GDPR)</b>, KVKK'dan farklı olarak takma adlandırmayı açıkça tanımlar (m.4/5) ve güvenlik tedbirleri arasında sayar (m.32/1-a). Ancak takma adlı veri, kodun kime ait olduğu bilindiği sürece kişisel veri sayılır (Gerekçe 26). Avrupa Veri Koruma Kurulu'nun (EDPB) 2025 tarihli <b>takma adlandırma rehberi</b> de aynı yaklaşımı benimser; rehberin nihai hâli henüz yayımlanmamıştır (EDPB, 2025).`));
-add(P(`AB Adalet Divanı'nın 04.09.2025 tarihli <b>EDPS v SRB</b> kararı (C-413/23 P, ECLI:EU:C:2025:645) bu konuya yeni bir bakış getirmiştir: Takma adlı veri, kodu çözme imkânı olmayan <b>alıcı</b> açısından kişisel veri sayılmayabilir (Stalla-Bourdillon, 2025). AB <b>Yapay Zekâ Tüzüğü</b> (2024/1689) ise yüksek riskli sistemler için veri kuralları getirir; bu yükümlülükler 2026/1744 sayılı Tüzük ile 2027–2028'e ertelenmiştir. Geliştirilen araç yalnızca insanların yazdığı kurallarla çalıştığı için bu Tüzük anlamında bir yapay zekâ sistemi sayılmadığı değerlendirilmektedir (Gerekçe 12).`));
+add(P(`AB'nin Genel Veri Koruma Tüzüğü (GDPR), KVKK'dan farklı olarak takma adlandırmayı açıkça tanımlar (m.4/5) ve güvenlik tedbirleri arasında sayar (m.32/1-a). Ancak takma adlı veri, kodun kime ait olduğu bilindiği sürece kişisel veri sayılır (Gerekçe 26). Avrupa Veri Koruma Kurulu'nun (EDPB) 2025 tarihli takma adlandırma rehberi de aynı yaklaşımı benimser; rehberin nihai hâli henüz yayımlanmamıştır (EDPB, 2025).`));
+add(P(`AB Adalet Divanı'nın 04.09.2025 tarihli EDPS v SRB kararı (C-413/23 P, ECLI:EU:C:2025:645) bu konuya yeni bir bakış getirmiştir: Takma adlı veri, kodu çözme imkânı olmayan alıcı açısından kişisel veri sayılmayabilir (Stalla-Bourdillon, 2025). AB Yapay Zekâ Tüzüğü (2024/1689) ise yüksek riskli sistemler için veri kuralları getirir; bu yükümlülükler 2026/1744 sayılı Tüzük ile 2027–2028'e ertelenmiştir. Geliştirilen araç yalnızca insanların yazdığı kurallarla çalıştığı için bu Tüzük anlamında bir yapay zekâ sistemi sayılmadığı değerlendirilmektedir (Gerekçe 12).`));
 add(TAB('KVKK ve GDPR karşılaştırması (proje açısından)', ['Konu', 'KVKK', 'GDPR', 'Projeye etkisi'], [
   ['Takma adlandırma', 'Tanımlanmamış', 'Tanımlı (m.4/5), güvenlik tedbiri (m.32)', 'Türk hukukunda boşluk var'],
   ['Anonim veri', 'm.3: hiçbir surette ilişkilendirilememe', 'Gerekçe 26: makul araçlarla ilişkilendirilememe', 'Araç "anonimleştirme" iddia etmez'],
@@ -83,7 +83,7 @@ add(BULLET(`<b>Test ortamları:</b> Erişim yetkileri geniştir ve kayıtlar dah
 // ------------------------------------------------------------------ 5
 add(h1('5. HUKUKİ RİSK ANALİZİ VE MEVZUATA UYUM DEĞERLENDİRMESİ'));
 add(h2('5.1. Yöntem'));
-add(P(`Her risk için <b>olasılık</b> (O) ve <b>etki</b> (E) 1 ile 5 arasında puanlanmış, risk skoru <b>O × E</b> olarak hesaplanmıştır. Skor 1–4 ise düşük, 5–9 orta, 10–16 yüksek, 20–25 çok yüksek kabul edilmiştir (Tablo 4).`));
+add(P(`Her risk için olasılık (O) ve etki (E) 1 ile 5 arasında puanlanmış, risk skoru O × E olarak hesaplanmıştır. Skor 1–4 ise düşük, 5–9 orta, 10–16 yüksek, 20–25 çok yüksek kabul edilmiştir (Tablo 4).`));
 add(TAB('Olasılık ve etki ölçeği', ['Puan', 'Olasılık (O)', 'Etki (E)'], [
   ['1', 'Neredeyse hiç olmaz', 'Kişi belirlenemez, yaptırım beklenmez'],
   ['2', 'Nadiren olur', 'Kısmi bilgi ortaya çıkar'],
@@ -104,7 +104,7 @@ add(TAB('Hukuki risk değerlendirmesi (önce: önlem yok; sonra: araç + idari �
   ['R8', '<i>Yeni:</i> Takma ad tablosunun sızması\n(KVKK m.12; GDPR m.4/5)', 'Müşteri', '–', 'Tablonun ayrı ve yerel saklanması', '2×4 = 8'],
 ], [0.7, 4.3, 1.8, 1.4, 3.3, 1.4]));
 add(h2('5.3. Mevzuata Uyum Değerlendirmesi'));
-add(P(`Mevcut durumda iş akışı KVKK m.4'teki ölçülülük ilkesine ve m.12'deki veri güvenliği yükümlülüğüne uygun değildir; kurum adına sözleşme olmadan yurt dışındaki bir araca veri girilmesi m.9 bakımından da sorunludur. Araç bu riskleri azaltır, ancak <b>tek başına uyum sağlamaz</b>. Bunun üç nedeni vardır:`));
+add(P(`Mevcut durumda iş akışı KVKK m.4'teki ölçülülük ilkesine ve m.12'deki veri güvenliği yükümlülüğüne uygun değildir; kurum adına sözleşme olmadan yurt dışındaki bir araca veri girilmesi m.9 bakımından da sorunludur. Araç bu riskleri azaltır, ancak tek başına uyum sağlamaz. Bunun üç nedeni vardır:`));
 add(P(`<b>1. Maskelenmiş veri çoğu zaman hâlâ kişisel veridir.</b> Maskeleme kart numarasının son dört hanesini, doğum yılını ve baş harfleri bırakır. Bu parçalar metindeki diğer bilgilerle birleşince kişi bulunabilir (Sweeney, 2002; Rocher ve diğerleri, 2019). Bu durumda KVKK m.3'teki anonimleştirme tanımı karşılanmaz.`));
 add(P(`<b>2. Takma adlı verinin durumu tartışmalıdır.</b> Kod tablosu kurumda kaldığı için veri kurum açısından kişisel veridir. ÜYZ sağlayıcısı açısından ise EDPS v SRB kararına göre, sağlayıcının kodu çözme imkânı yoksa veri kişisel veri sayılmayabilir. Ancak bu, metinde hassas ve dolaylı bilgi kalmamasına bağlıdır (Bölüm 8'de bu bilgilerin kaldığı görülecektir). Ayrıca bu bir AB kararıdır; Türk Kurulu'nun aynı görüşü benimseyip benimsemeyeceği bilinmemektedir. Bu nedenle en güvenli yorum, takma adlı veriyi de kişisel veri kabul etmektir.`));
 add(P(`<b>3. Araç yeni riskler yaratır.</b> Aracın bulamadığı bir veri, kullanıcıda "metin temizlendi" yanılgısı yaratabilir (R7). Takma ad tablosu ise bütün kimlikleri geri açabilen yeni bir hassas dosyadır (R8). Bu yüzden araç, kurumsal politika ve insan kontrolüyle birlikte kullanılmalıdır.`));
@@ -112,7 +112,7 @@ add(P(`<b>3. Araç yeni riskler yaratır.</b> Aracın bulamadığı bir veri, ku
 // ------------------------------------------------------------------ 6
 add(h1('6. ÖNERİLEN ÇÖZÜM, SİSTEM TASARIMI VE YÖNTEM'));
 add(h2('6.1. Tasarım İlkeleri ve Neden Bu Çözüm?'));
-add(P(`Çözüm, GDPR m.25'teki <b>tasarımdan itibaren gizlilik</b> (Privacy by Design) fikrine dayanır: Veri, kurumdan çıktıktan sonra değil, çıkmadan önce korunur. Tasarımda dört ilke izlenmiştir:`));
+add(P(`Çözüm, GDPR m.25'teki tasarımdan itibaren gizlilik (Privacy by Design) fikrine dayanır: Veri, kurumdan çıktıktan sonra değil, çıkmadan önce korunur. Tasarımda dört ilke izlenmiştir:`));
 add(BULLET(`<b>Yerellik:</b> Araç hiçbir dış servise bağlanmaz; yeni bir veri aktarımı yaratmaz.`));
 add(BULLET(`<b>Doğrulama:</b> Bir sayı, yalnızca biçimi değil kontrol hanesi de doğruysa kişisel veri sayılır. Böylece sipariş numarası gibi sayılar yanlışlıkla gizlenmez.`));
 add(BULLET(`<b>Seçilebilir koruma:</b> Kullanıcı, amacına göre maskeleme, takma ad veya kaldırma seçer.`));
@@ -170,12 +170,12 @@ add(FIG('docs/screenshots/text-masking.png', 1826, 627, 'Bulunan verilerin renkl
 add(FIG('docs/screenshots/risk-report.png', 1800, 742, 'Risk raporu ve hassas bilgi uyarıları', 'Kaynak: Uygulamanın ekran görüntüsü (sentetik veri).', 500));
 add(P(`Aynı işlem 11 satırlık sentetik bir Excel tablosunda da denenmiştir: 77 kişisel veri bulunmuş ve her müşteri tüm sütunlarda aynı takma adı almıştır. Bu çıktı, gerçek veri yerine test ortamında kullanılabilir.`));
 add(h2('8.3. Hukuki Değerlendirme'));
-add(P(`Senaryo üç şeyi göstermektedir. <b>Birincisi</b>, kontrol hanesi doğrulaması sayesinde sipariş numarası yanlışlıkla gizlenmemiş, metnin işe yarar kısmı korunmuştur. <b>İkincisi</b>, aynı telefonun iki farklı yazımı aynı takma adı almıştır; ÜYZ'den gelen yanıt kurum içinde kod tablosuyla doğru kişiye geri eşlenebilir. <b>Üçüncüsü ve en önemlisi</b>, gizlenmiş metinde "Person_1 ... diyabet hastası ... sendika üyesi" bilgisi kalmaktadır. Bu, takma adlı bir kişiye ait hassas veridir ve KVKK m.6 kapsamındadır. Araç bu bilgiyi otomatik silmez, çünkü aynı kelimeler başka bir bağlamda kişisel veri olmayabilir; karar uyarıyı gören kişiye bırakılır.`));
+add(P(`Senaryonun sonucu olarak kontrol hanesi doğrulaması sayesinde sipariş numarası yanlışlıkla gizlenmemiş, metnin işe yarar kısmı korunmuştur. Aynı telefonun iki farklı yazımı aynı takma adı almıştır; böylece ÜYZ'den gelen yanıt kurum içinde kod tablosuyla doğru kişiye geri eşlenebilir. Son olarak gizlenmiş metinde "Person_1 ... diyabet hastası ... sendika üyesi" bilgisi kalmaktadır. Bu, takma adlı bir kişiye ait hassas veridir ve KVKK m.6 kapsamındadır. Araç bu bilgiyi otomatik silmez, çünkü aynı kelimeler başka bir bağlamda kişisel veri olmayabilir; karar uyarıyı gören kişiye bırakılır.`));
 
 // ------------------------------------------------------------------ 9
 add(h1('9. BULGULAR, KARŞILAŞTIRMALI ANALİZ VE DEĞERLENDİRME'));
 add(h2('9.1. Tespit Doğruluğu'));
-add(P(`Aracın başarısı, cevabı önceden bilinen 200 sentetik belgede ölçülmüştür. Her belgede 7 türden birer kişisel veri ve kişisel veriye benzeyen 6 tuzak (kontrol hanesi bozuk numaralar, fatura tarihi, içinde ad geçen kurum adı gibi) vardır. İki ölçüt kullanılmıştır: <b>Kesinlik</b>, aracın "kişisel veri" dediklerinin ne kadarının gerçekten kişisel veri olduğunu; <b>duyarlılık</b> ise metindeki gerçek kişisel verilerin ne kadarının bulunduğunu gösterir.`));
+add(P(`Aracın başarısı, cevabı önceden bilinen 200 sentetik belgede ölçülmüştür. Her belgede 7 türden birer kişisel veri ve kişisel veriye benzeyen 6 tuzak (kontrol hanesi bozuk numaralar, fatura tarihi, içinde ad geçen kurum adı gibi) vardır. İki ölçüt kullanılmıştır: Kesinlik, aracın "kişisel veri" dediklerinin ne kadarının gerçekten kişisel veri olduğunu; duyarlılık ise metindeki gerçek kişisel verilerin ne kadarının bulunduğunu gösterir.`));
 add(TAB('Veri türlerine göre tespit doğruluğu (200 sentetik belge)', ['Veri türü', 'Metinde', 'Bulunan', 'Kaçırılan', 'Yanlış alarm', 'Kesinlik', 'Duyarlılık'], [
   ['Ad soyad', '200', '200', '0', '76', '%72,5', '%100'],
   ['T.C. kimlik no, telefon, e-posta, IBAN, kart, doğum tarihi (her biri)', '200', '200', '0', '0', '%100', '%100'],
@@ -188,7 +188,7 @@ add(TAB('Zor durumlarda tespit oranı', ['Durum', 'Örnek', 'Bulunan', 'Oran'], 
   ['Sözlükte olmayan ad, ipucu kelime yok', '50', '0', '<b>%0</b>'],
   ['Parantezli telefon ((0532) 123 45 67)', '50', '50', '%100'],
 ], [6, 1.3, 1.5, 1.3]));
-add(P(`Resmî yazışmalarda adlar sık sık büyük harfle yazıldığı için bu, aracın <b>en önemli sınırlılığıdır</b> ve R7 riskinin somut kanıtıdır.`));
+add(P(`Resmî yazışmalarda adlar sık sık büyük harfle yazıldığı için bu, aracın en önemli sınırlılığıdır ve R7 riskinin somut kanıtıdır.`));
 add(h2('9.2. Önlem Öncesi ve Sonrası Risk'));
 add(P(`Şekil 5, Tablo 5'teki risklerin önlemlerden önceki ve sonraki yerini göstermektedir. Çok yüksek düzeydeki iki risk (R1, R2) orta düzeye inmiş, test ortamı (R4) ve model çıktısı (R5) riskleri düşük düzeye gerilemiştir. Yeni çıkan iki risk de dahil toplam risk skoru 88'den 55'e düşmüştür. Ancak hassas veri riski (R3) yüksek kalmış, dolaylı bilgi riski (R6) değişmemiştir.`));
 add(FIG('docs/report/figures/sekil3_risk_matrisi.png', 2200, 982, 'Önlemlerden önce (a) ve sonra (b) risk matrisi', 'Kaynak: Yazar tarafından Tablo 5\'teki puanlarla hazırlanmıştır.', 560));
@@ -211,5 +211,5 @@ add(BULLET(`<b>Geliştirme için:</b> Büyük harf desteği, Türkçe ad tanıma
 
 // ------------------------------------------------------------------ 11
 add(h1('11. YAPAY ZEKÂ ARAÇLARININ KULLANIMI BEYANI'));
-add(P(`Bu projede Claude (Anthropic) üretken yapay zekâ aracı; yazılım geliştirmede kod önerisi ve hata ayıklama, kaynak araştırmasının planlanması, rapor taslağının ve şekillerin hazırlanması aşamalarında yardımcı olarak kullanılmıştır. Rapordaki kanun maddeleri, Resmî Gazete bilgileri, ceza tutarları, KVK Kurumu alıntıları, AB düzenlemeleri, mahkeme kararı ve akademik kaynaklar öğrenci tarafından Mevzuat Bilgi Sistemi, Resmî Gazete, KVK Kurumu, EUR-Lex ve yayıncı sayfalarından tek tek doğrulanmıştır. Ölçüm sonuçları proje deposundaki betik çalıştırılarak elde edilmiştir. Yapay zekâ aracına gerçek kişisel veri girilmemiştir. Rapordaki hukuki değerlendirmeler kesin hukuki görüş niteliğinde değildir.`));
+add(P(`Bu projede Claude (Anthropic) üretken yapay zekâ aracı yardımcı olarak kullanılmıştır: (i) yazılımın bazı bölümlerinde kod önerisi ve hata ayıklama, (ii) kaynak araştırmasının planlanması ve ön taraması, (iii) rapor metninin ilk taslağının, şekillerin ve tabloların hazırlanması. Projenin konusu ve kapsamı öğrenci tarafından belirlenmiş, aracın kodu öğrenci tarafından yazılmıştır. Rapordaki kanun maddeleri, Resmî Gazete bilgileri, ceza tutarları, KVK Kurumu alıntıları, AB düzenlemeleri, mahkeme kararı ve akademik kaynaklar öğrenci tarafından resmî kaynaklardan tek tek doğrulanmış; bu süreçte taslaktaki eksik ve hatalı ifadeler (karar künyesi, kanun bendinin kapsamı, alıntı ifadeleri ve sayfa numaraları) düzeltilmiştir. Taslak metin öğrenci tarafından gözden geçirilerek düzenlenmiş, bazı bölümleri öğrencinin kendi ifadeleriyle yeniden yazılmıştır; nihai metnin akademik sorumluluğu öğrenciye aittir. Yapay zekâ aracına gerçek kişisel veri girilmemiştir.`));
 };
